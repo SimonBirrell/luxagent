@@ -50,10 +50,11 @@
   <run_depend>python-ws4py-pip</run_depend>
   <run_depend>python-bson</run_depend>
 
-  <!-- rosgraph -->
+  <!-- rosgraph 
   <run_depend>python-netifaces</run_depend>
   <run_depend>python-rospkg</run_depend>
   <test_depend>python-mock</test_depend>
+-->
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

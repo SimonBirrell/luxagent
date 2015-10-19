@@ -1,9 +1,11 @@
+from gevent import monkey; monkey.patch_all()
+import gevent
+
 import sys
 if 'threading' in sys.modules:
     del sys.modules['threading']
     # See http://stackoverflow.com/questions/8774958/keyerror-in-module-threading-after-a-successful-py-test-run
-from gevent import monkey; monkey.patch_all()
-import gevent
+
 from ws4py.websocket import WebSocket
 from ws4py.websocket import EchoWebSocket
 from ws4py.server.geventserver import WSGIServer
@@ -18,13 +20,18 @@ import nose
 SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 8001
 
+# This class instantiates and 'engine' that runs the tests.
+# A dummy server class is created that accepts a websocket connection.
+
 class TddHelp:
     def setUp(self):
         foo = 0
                      
     def tearDown(self):
         self.dummy_server.close()
-    
+
+    # Create a dummy server using the supplied handler and connect to it via a websocket.    
+    #
     def run_generic(self, server_handler, title):
         print title
         self.dummy_server = DummyServer(server_handler)
@@ -41,6 +48,9 @@ class TddHelp:
         gevent.sleep(0.1)
         self.agent.stop()   
 
+    # Create a dummy server using the supplied handler and connect to it via a websocket.    
+    # Then send a message to the server.
+    #
     def run_generic_with_command(self, server_handler, mtype, mbody, title):
         print title
         Server_received_mtype = False    
@@ -62,6 +72,10 @@ class TddHelp:
         gevent.sleep(0.1)
         self.agent.stop()   
 
+# Base class for the various simulated servers. Each simulated server implements the 
+# interpret_message() method differently
+#        
+
 class DummyServerHandler(WebSocket):
     def send_message(self, json_message):
         message = json.dumps(json_message)        
@@ -76,8 +90,8 @@ class DummyServerHandler(WebSocket):
             mbody = False
         self.interpret_message(mtype, mbody)            
 
-################### Utility Functions #################################
-
+# The dummy server recives web socket messages and passes them to a supplied handler.
+#
 class DummyServer():
     def __init__(self, handler):
         self.ws_server = WSGIServer((SERVER_HOST, SERVER_PORT), WebSocketWSGIApplication(handler_cls=handler))
@@ -89,12 +103,18 @@ class DummyServer():
     def close(self):
         self.ws_server.close()    
 
+# This class mocks out the RosCommunication() class and records if particular methods
+# have been called.
+#
 class DummyRos():
     def __init__(self):
         self.rosrun_received = False
         self.roslaunch_received = False
         self.kill_received = False
         self.topic_message_received = False
+
+    def start_pubsub(self):
+        return    
 
     def get_machine_graph(self):
         return {}    
