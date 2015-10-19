@@ -41,7 +41,7 @@ TODO
 General Tidy up:
 - The code for two standard modules ROSGRAPH and ROSBRIDGE are included in the repo because I haven't found a way of importing them reliably otherwise. This should be fixed and the code for these two modules removed.
 
-After handing over:
+New features:
 - Add general compression to protocol. Have tried LZW but without success so far (apparent incompatibilities between JS and Python implementations).
 - Add specific, efficient compression for images and streams of images.
 - Add more robust authentication, configured on the client.
