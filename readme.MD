@@ -26,7 +26,11 @@ cd src
 nosetests --with-watch -s
 ```
 
+Nosetests with watch require the following plugin to work:
+
 pip install nose-watch
+
+NOTE: Currently these can be run on a machine even if ROS isn't installed. This is because the code for libraries rosgraph and rosbridge have been included in the repo. These should be removed for cleanliness which will then mean you need to run the tests from a ROS-enabled machine.
 
 Protocol
 --------
@@ -34,10 +38,8 @@ The protocol used for server communication is defined in the README for LuxServe
 
 TODO
 ----
-Before handing over:
-- Finish or remove BSON module.
-- Finish documentation.
-- General tidy up.
+General Tidy up:
+- The code for two standard modules ROSGRAPH and ROSBRIDGE are included in the repo because I haven't found a way of importing them reliably otherwise. This should be fixed and the code for these two modules removed.
 
 After handing over:
 - Add general compression to protocol. Have tried LZW but without success so far (apparent incompatibilities between JS and Python implementations).
