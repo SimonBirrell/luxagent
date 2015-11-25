@@ -92,7 +92,8 @@ class ServerCommunication():
     #
     def agent_connect(self, ros_instance_base, org_id, machine_id, username, secret):
         print "Connecting agent: " +  ros_instance_base
-        self.send_to_server('agentConnect', {'rosinstance': ros_instance_base, 'org': org_id, 'user': username, 'secret': secret, 'hostname' : machine_id})
+        # TODO Human name hard-coded
+        self.send_to_server('agentConnect', {'rosinstance': ros_instance_base, 'org': org_id, 'user': username, 'secret': secret, 'hostname' : machine_id, 'rosInstanceHuman' : 'Pi Robot'})
         
     # Send a (mtype, mbody) message to the server. Buffer message if the websocket isn't ready.   
     # Currently, this drops a message if it is so big that it is likely to crash the websocket.
