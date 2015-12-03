@@ -166,6 +166,12 @@ class RosGraphApi(object):
                 graph_for_agent.append([self._edge_to_edge_key(edge), self._edge_to_edge_value(edge)])
         return graph_for_agent      
 
+    # Get the complete graph
+    #
+    def get_graph(self):
+        new_agent_graph = self.convert_graph_to_agent_format(self.graph.nn_nodes, self.graph.nt_nodes, self.graph.nt_edges)
+        return self.augment_graph(new_agent_graph)
+
     # Return only the sections of the graph referenced by supplied keys
     #
     def filter_graph_by_keys(self, graph, keys):

@@ -106,7 +106,8 @@ class RosCommunication():
     # to server
     #
     def get_graph(self):
-        return self.ros_graph_api.convert_graph_to_agent_format(self.ros_graph_api.graph.nn_nodes, self.ros_graph_api.graph.nt_nodes, self.ros_graph_api.graph.nt_edges)
+        #return self.ros_graph_api.convert_graph_to_agent_format(self.ros_graph_api.graph.nn_nodes, self.ros_graph_api.graph.nt_nodes, self.ros_graph_api.graph.nt_edges)
+        return self.ros_graph_api.get_graph()
         
     ################# Calls from ROS modules ######################    
     # When a ROS or OS event occurs.
