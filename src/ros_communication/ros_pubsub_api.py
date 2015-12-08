@@ -51,7 +51,7 @@ class RosPubSubApi(object):
 		if topicKey in self.publication_channels:
 			self.publication_channels[topicKey].publish(topicMessage)
 		else:
-			raise NameError("Tried to publish to unsbscribed topic: " + topicKey)	
+			print "Tried to publish to unsbscribed topic: " + topicKey
 
 	# Check list of subscriptions for a particular topic and see if we know the message type for it.
 	#
