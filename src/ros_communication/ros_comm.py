@@ -60,6 +60,7 @@ class RosCommunication():
 
     # The machine id is simply the bare hostname
     def get_machine_id(self):
+        return "ros-workstation"
         return self.ros_graph_api.get_hostname()    
 
     # This will generally be the Agent wanting to get callbacks on ROS events

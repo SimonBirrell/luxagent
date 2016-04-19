@@ -101,9 +101,10 @@ class ServerCommunication():
     #
     def send_to_server(self, mtype, mbody, binary=False):
         message = {'mtype': mtype, 'mbody': mbody}
-        if binary:
+        if binary and False:
             # This bizarre dance is because BSON seems to serialize embedded objects as binary data
             # The following will "normalize" the JSON array before trasnmitting
+            print "BINARY"
             message = json.dumps(message)
             message = json.loads(message)
             message = bson.dumps(message)
@@ -121,7 +122,8 @@ class ServerCommunication():
                     #print "agent -> server: " + message
                 if (self.connected):
                     self.flush_buffer()
-                    self.safe_send(message, binary)
+                    #self.safe_send(message, binary)
+                    self.safe_send(message, False)
                 else:
                     self.add_to_output_buffer(message)
                     print "Message to server stored in output buffer - no connection yet."

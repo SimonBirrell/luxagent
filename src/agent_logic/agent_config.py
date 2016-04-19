@@ -1,8 +1,10 @@
-# Config file for running agent in production environment.
+# Config file for running agent in development environment.
 #
-# The server is assumed to be running on Heroku.
+# I had some difficulty using localhost, so that's why I'm
+# using a Bonjour-enabled URL for my local machine.
 #
-SERVER_URL = 'ws://luxserver.herokuapp.com:80/'
+
+SERVER_URL = 'ws://simonbirrell.local:8080/'
 
 class AgentConfig(object):
 
