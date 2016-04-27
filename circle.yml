@@ -7,24 +7,12 @@ dependencies:
       - sudo rosdep init
       - rosdep update
       - echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
-      - source ~/.bashrc
-      - python -c 'import sys; print(sys.path)'
       - sudo apt-get install python-rosinstall
       - mkdir -p ~/catkin_ws/src
       - source /opt/ros/indigo/setup.bash && cd ~/catkin_ws/src && catkin_init_workspace
-      - printenv | grep PYTHONPATH
-      - ls -l /usr/lib/pymodules/python2.7
       - sudo apt-get install python-pip
       - sudo pip install -U catkin_pkg
-      - python -c 'import sys; print(sys.path)'
-      - printenv | grep PYTHONPATH
-      - sudo rm -rf /usr/local/lib/python2.7/dist-packages/catkin*
       - sudo dpkg -L python-catkin-pkg
-      - export PYTHONPATH="/usr/lib/python2.7/dist-packages:${PYTHONPATH}" && python -c 'import catkin_pkg; print(catkin_pkg.__file__)'
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
-      - python -c 'import sys; print(sys.path)'
-      - ls -l /usr/lib/pymodules/python2.7
-      - printenv | grep PYTHONPATH
-      - source /opt/ros/indigo/setup.bash && cd ~/catkin_ws/ && catkin_make
-      - source /opt/ros/indigo/setup.bash && source ~/catkin_ws/devel/setup.bash
-
+      - cd ~/catkin_ws/ && catkin_make
+      
