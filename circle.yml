@@ -16,9 +16,8 @@ dependencies:
       - sudo apt-get install python-catkin-pkg
       - printenv | grep PYTHONPATH
       - sudo rm -rf /usr/local/lib/python2.7/dist-packages/catkin*
-      - export PYTHONPATH="/usr/lib/python2.7/dist-packages/catkin_pkg;${PYTHONPATH}" && sudo dpkg -L python-catkin-pkg
       - sudo dpkg -L python-catkin-pkg
-      - python -c 'import catkin_pkg; print(catkin_pkg.__file__)'
+      - export PYTHONPATH="/usr/lib/python2.7/dist-packages/catkin_pkg;${PYTHONPATH}" && python -c 'import catkin_pkg; print(catkin_pkg.__file__)'
       - python -c 'import sys; print(sys.path)'
       - ls -l /usr/lib/pymodules/python2.7
       - printenv | grep PYTHONPATH
