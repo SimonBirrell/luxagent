@@ -20,7 +20,7 @@ dependencies:
       - printenv | grep PYTHONPATH
       - sudo rm -rf /usr/local/lib/python2.7/dist-packages/catkin*
       - sudo dpkg -L python-catkin-pkg
-      - export PYTHONPATH="/usr/lib/python2.7/dist-packages/catkin_pkg;${PYTHONPATH}" && python -c 'import catkin_pkg; print(catkin_pkg.__file__)'
+      - export PYTHONPATH="/usr/lib/python2.7/dist-packages:${PYTHONPATH}" && python -c 'import catkin_pkg; print(catkin_pkg.__file__)'
       - python -c 'import sys; print(sys.path)'
       - ls -l /usr/lib/pymodules/python2.7
       - printenv | grep PYTHONPATH
