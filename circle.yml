@@ -13,11 +13,6 @@ dependencies:
       - sudo apt-get install python-catkin-pkg
       - source /opt/ros/indigo/setup.bash
       - mkdir -p ~/catkin_ws/src
-      - cd ~/catkin_ws/src
-      - catkin_init_workspace
-      - cd ~/catkin_ws/
-      - catkin_make
-      - source devel/setup.bash
-general:
-   build_dir: ~/catkin_ws/src/luxagent/src
-
+      - cd ~/catkin_ws/src && catkin_init_workspace
+      - cd ~/catkin_ws/ && catkin_make
+      - source ~/catkin_ws/devel/setup.bash
