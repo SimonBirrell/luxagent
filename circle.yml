@@ -10,9 +10,9 @@ dependencies:
       - source ~/.bashrc
       - sudo apt-get install python-rosinstall
       - sudo apt-get install ros-indigo-catkin
-      - sudo apt-get install python-catkin-pkg
+      - # sudo apt-get install python-catkin-pkg
       - source /opt/ros/indigo/setup.bash
       - mkdir -p ~/catkin_ws/src
-      - cd ~/catkin_ws/src && catkin_init_workspace
-      - cd ~/catkin_ws/ && catkin_make
-      - source ~/catkin_ws/devel/setup.bash 
+      - source /opt/ros/indigo/setup.bash && cd ~/catkin_ws/src && catkin_init_workspace
+      - source /opt/ros/indigo/setup.bash && cd ~/catkin_ws/ && catkin_make
+      - source /opt/ros/indigo/setup.bash && source ~/catkin_ws/devel/setup.bash 
