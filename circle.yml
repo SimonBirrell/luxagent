@@ -19,5 +19,5 @@ dependencies:
       - catkin_make
       - source devel/setup.bash
 general:
-   build_dir: catkin_ws/src/luxagent/src
+   build_dir: ~/catkin_ws/src/luxagent/src
 
