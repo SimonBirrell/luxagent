@@ -9,9 +9,10 @@ dependencies:
       - echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
       - sudo apt-get install python-rosinstall
       - mkdir -p ~/catkin_ws/src
-      - source /opt/ros/indigo/setup.bash && cd ~/catkin_ws/src && catkin_init_workspace
+      - cd ~/catkin_ws/src && catkin_init_workspace
       - sudo apt-get install python-pip
       - sudo pip install -U catkin_pkg
+      - sudo pip install gevent
       - sudo dpkg -L python-catkin-pkg
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
