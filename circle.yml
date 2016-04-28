@@ -11,6 +11,7 @@ dependencies:
       - mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && catkin_init_workspace
       - pip install gevent
       - pip install ws4py
+      - pip install bson
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
       
