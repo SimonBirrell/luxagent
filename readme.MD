@@ -56,3 +56,6 @@ New features:
 License
 -------
 (c) 2015 Robot Lux. All Rights Reserved.
+
+[![Circle CI](https://circleci.com/gh/manacoa/luxagent.svg?style=svg)](https://circleci.com/gh/manacoa/luxagent)
+
