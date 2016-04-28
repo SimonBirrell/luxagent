@@ -11,6 +11,5 @@ dependencies:
       - pip install 'gevent==1.0.2'
       - pip install 'ws4py==0.3.4'
       - pip install 'bson==0.4.0'
-      - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
       
