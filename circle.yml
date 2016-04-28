@@ -12,7 +12,8 @@ dependencies:
       - cd ~/catkin_ws/src && catkin_init_workspace
       - sudo apt-get install python-pip
       - sudo pip install -U catkin_pkg
-      - sudo pip install gevent
+      - sudo pip install 'gevent==1.0.2'
+      - sudo dpkg -L gevent
       - sudo dpkg -L python-catkin-pkg
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
