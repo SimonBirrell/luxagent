@@ -15,7 +15,7 @@ dependencies:
       - sudo pip install --upgrade pip
       - pip -V
       - sudo pip install -U catkin_pkg
-      - sudo pip install gevent
+      - sudo pip install -H gevent
       - pip show gevent
       - sudo dpkg -L python-catkin-pkg
       - sudo dpkg -L gevent
