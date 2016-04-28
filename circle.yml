@@ -17,7 +17,6 @@ dependencies:
       - pip install gevent
       - pip show gevent
       - sudo dpkg -L python-catkin-pkg
-      - sudo dpkg -L gevent
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
       
