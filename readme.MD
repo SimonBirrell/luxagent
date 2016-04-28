@@ -57,5 +57,5 @@ License
 -------
 (c) 2015 Robot Lux. All Rights Reserved.
 
-[![Circle CI](https://circleci.com/gh/manacoa/luxagent.svg?style=svg)](https://circleci.com/gh/manacoa/luxagent)
+[![Circle CI](https://circleci.com/gh/manacoa/luxagent.svg?style=svg&circle-token=812c7117d6a3f1d2d83ce1dd0994cf5a530cb9e8)](https://circleci.com/gh/manacoa/luxagent)
 
