@@ -49,7 +49,6 @@
   <run_depend>rospy</run_depend>
   <run_depend>python-gevent</run_depend>
   <run_depend>python-ws4py-pip</run_depend>
-  <exec_depend>python-ws4py-pip</exec_depend>
   <run_depend>python-bson</run_depend>
 
   <!-- rosgraph 
