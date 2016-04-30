@@ -1,7 +1,7 @@
 # Test if messages from the server trigger the appropriate calls to the ROS subsystem
 #
 
-from tests.helpers import TddHelp, DummyServerHandler 
+from helpers import TddHelp, DummyServerHandler 
 import nose
 
 Server_received_mtype = False

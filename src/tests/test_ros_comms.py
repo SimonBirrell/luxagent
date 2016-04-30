@@ -2,8 +2,8 @@
 #
 
 import nose
-from ros_communication import ros_comm 
-from agent_logic.agent import Agent
+from luxagent.ros_communication import ros_comm 
+from luxagent.agent import Agent
 
 AGENT_FORMAT_TEST_GRAPH = [['foo','bar'], ['baz','boo']]
 

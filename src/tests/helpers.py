@@ -11,8 +11,8 @@ from ws4py.websocket import EchoWebSocket
 from ws4py.server.geventserver import WSGIServer
 from ws4py.server.wsgiutils import WebSocketWSGIApplication
 from ws4py.client.geventclient import WebSocketClient
-from server_communication import websockets 
-from agent_logic.agent import Agent
+from luxagent.server_communication import websockets 
+from luxagent.agent import Agent
 from time import sleep
 import json
 import nose
