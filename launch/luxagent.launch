@@ -1,0 +1,3 @@
+<launch>
+		<node name="luxagent" pkg="luxagent" type="luxagent2.py" />
+</launch>
