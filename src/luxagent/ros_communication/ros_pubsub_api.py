@@ -7,9 +7,9 @@ import sys
 
 # Standard ROS libraries
 from rostopic import get_topic_type
-from ros_communication.rosbridge import ros_loader
-from ros_communication.rosbridge import message_conversion
-from ros_communication.rosbridge.topics import TopicNotEstablishedException, TypeConflictException
+from rosbridge import ros_loader
+from rosbridge import message_conversion
+from rosbridge.topics import TopicNotEstablishedException, TypeConflictException
 from rospy import Publisher
 from rosbridge_library.internal import ros_loader, message_conversion
 
