@@ -5,7 +5,7 @@ project(luxagent)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  rosbridge_library
+  rosbridge_suite
   rosgraph
   rospy
 )
@@ -82,7 +82,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES luxagent
-   CATKIN_DEPENDS rosgraph rospy rosbridge_library
+   CATKIN_DEPENDS rosgraph rospy rosbridge_suite
 #  DEPENDS system_lib
 )
 
