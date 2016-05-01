@@ -11,4 +11,7 @@ dependencies:
       - pip install 'gevent==1.0.2'
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
+test:
+   pre:
+      - cd ~/catkin_ws/ && catkin_make      
       
