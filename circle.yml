@@ -8,6 +8,9 @@ dependencies:
       - rosdep update
       - echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
       - mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && catkin_init_workspace
+      - mkdir catkin_ws/src/luxagent
+      - cp -r luxagent/* catkin_ws/src/luxagent
+      - cd ~/catkin_ws/src && catkin_init_workspace
       - pip install 'gevent==1.0.2'
       - echo "export PYTHONPATH=/usr/lib/python2.7/dist-packages:${PYTHONPATH}" >> ~/.bashrc
       - cd ~/catkin_ws/ && catkin_make
