@@ -50,6 +50,7 @@
   <run_depend>python-gevent</run_depend>
   <run_depend>python-ws4py-pip</run_depend>
   <run_depend>python-bson</run_depend>
+  <run_depend>rosbridge_library</run_depend>
 
   <!-- rosgraph 
   <run_depend>python-netifaces</run_depend>
