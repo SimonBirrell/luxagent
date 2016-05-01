@@ -82,7 +82,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES luxagent
-#  CATKIN_DEPENDS rosgraph rospy
+   CATKIN_DEPENDS rosgraph rospy rosbridge_library
 #  DEPENDS system_lib
 )
 
