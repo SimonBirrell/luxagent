@@ -38,8 +38,6 @@ The protocol used for server communication is defined in the README for LuxServe
 
 TODO
 ----
-General Tidy up:
-- The code for two standard modules ROSGRAPH and ROSBRIDGE are included in the repo because I haven't found a way of importing them reliably otherwise. This should be fixed and the code for these two modules removed.
 
 New features:
 - Add general compression to protocol. Have tried LZW but without success so far (apparent incompatibilities between JS and Python implementations).
@@ -51,7 +49,7 @@ New features:
 - Get Python dependencies to auto-install via ROS mechanisms
 - Automatic update of Agent software when a new version is published
 - Pre-launch
-- -
+- Check out some rosgraph error messages at startup
 
 License
 -------
