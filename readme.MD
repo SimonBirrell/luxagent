@@ -50,6 +50,7 @@ New features:
 - Automatic update of Agent software when a new version is published
 - Pre-launch
 - Check out some rosgraph error messages at startup
+- Make it compatible with gevent 1.1
 
 License
 -------

@@ -10,6 +10,3 @@ from luxagent import main
 
 if __name__== '__main__':
      main()
-
-#import agent_logic.main
-#agent_logic.main.main()
