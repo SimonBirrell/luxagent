@@ -1,0 +1,5 @@
+# This script simply pulls in the latest version of luxagent from the default repo
+# The branch and repo can be changed for testing purposes
+
+cwd=$(pwd)
+echo $cwd
