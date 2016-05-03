@@ -15,7 +15,7 @@ def update():
 	print "Executing in", base_dir
 	process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
 	print "waiting..."
-	process.wait()
+	process.communicate()
 	print "stdout:", process.stdout
 	print "return code", process.returncode
 
