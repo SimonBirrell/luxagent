@@ -24,7 +24,7 @@ def update():
 if __name__== '__main__':
 	import luxagent
 	print "Current version", luxagent.version()
-	update()
+	#update()
 	reload(luxagent)
 	print "Running version", luxagent.version()
 	#luxagent.main()
