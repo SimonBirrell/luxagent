@@ -6,6 +6,7 @@
 import os
 import sys
 from subprocess import call, Popen
+import luxagent
 
 def update():
 	script_dir, filename = os.path.split(sys.argv[0])
@@ -22,7 +23,6 @@ def update():
 	print "return code", process.returncode
 
 if __name__== '__main__':
-	import luxagent
 	print "Current version", luxagent.version()
 	update()
 	reload(luxagent)
