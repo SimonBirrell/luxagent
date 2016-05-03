@@ -6,25 +6,21 @@
 import os
 import sys
 from subprocess import call, Popen
-from luxagent import version
+import luxagent
 
 def update():
 	script_dir, filename = os.path.split(sys.argv[0])
 	base_dir = script_dir + "/.."
 
-
-	#process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir, stdout=PIPE, stderr=STDOUT)
 	print "Executing in", base_dir
 	process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
-	#process = Popen(['git', 'status'], cwd=base_dir)
 	process.wait()
-	print "stdout:"
-	print process.stdout
+	print "stdout:", process.stdout
 	print "return code", process.returncode
 
 if __name__== '__main__':
-	print "Current version", version()
+	print "Current version", luxagent.version()
 	update()
 	reload(luxagent)
-	print "Running version", version()
+	print "Running version", luxagent.version()
 	#luxagent.main()
