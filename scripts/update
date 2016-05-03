@@ -11,10 +11,11 @@ def update():
 	script_dir, filename = os.path.split(sys.argv[0])
 	base_dir = script_dir + "/.."
 
-	Popen('pwd', cwd=base_dir)
 
 	#process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir, stdout=PIPE, stderr=STDOUT)
+	print "Executing in", base_dir
 	process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
+	#process = Popen(['git', 'status'], cwd=base_dir)
 	process.wait()
 	print "stdout:"
 	print process.stdout
