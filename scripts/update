@@ -3,13 +3,9 @@
 # This script updates to the latest version of the luxagent code
 # on github. The branch used is 'distribution'.
 
-import reloader
-reloader.enable()
-
 import os
 import sys
 from subprocess import call, Popen
-import luxagent
 
 def update():
 	script_dir, filename = os.path.split(sys.argv[0])
@@ -26,8 +22,8 @@ def update():
 	call(['cat','src/luxagent/version.py'], cwd=base_dir)
 
 if __name__== '__main__':
-	print "Current version", luxagent.version()
+	#print "Current version", luxagent.version()
 	update()
-	reloader.reload(luxagent)
+	import luxagent
 	print "Running version", luxagent.version()
 	#luxagent.main()
