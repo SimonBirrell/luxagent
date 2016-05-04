@@ -21,16 +21,17 @@ def create_config_file_if_necessary():
 		# Copy config-default.sh to config.sh if it doesn't already exist
 		print "Checking for existence of", config_pathname, config_exists 
 		if config_exists == True:
-			print config + " already exists"
+			print config_pathname + " already exists"
 		else:	
-			print "Copying " + config_default + " to " + config
+			print "Copying " + config_default_pathname + " to " + config_pathname
 			call(["cp", config_default_pathname, config_pathname])	
 
 		Config_dict = {}
 		with open(config_pathname, 'r') as f:
 			for line in f:
 				splitLine = line.split(':')
-				Config_dict[splitLine[0]] = splitLine[1]
+				if len(splitLine)>1:
+					Config_dict[splitLine[0]] = splitLine[1]
 		print "Config_dict"
 		print Config_dict		
 
