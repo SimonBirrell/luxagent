@@ -13,8 +13,12 @@ def update():
 	base_dir = script_dir + "/.."
 
 	print "Configuring git"
-	call(['git', 'config', 'user.email', 'foo@bar.com'], shell=True)
-	call(['git', 'pull', 'origin', 'distribution'], shell=True)
+	call(['git', 'config', 'user.email', 'foo@bar.com'])
+	print "fecth"
+	call(['git', 'fetch', '--all'])
+	print "reset"
+	call(['git', 'reset', '--hard', 'origin/distribution'])
+	#call(['git', 'pull', 'origin', 'distribution'])
 	print "Executing in", base_dir
 	#process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
 	print "waiting..."
