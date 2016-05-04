@@ -14,10 +14,11 @@ def update():
 
 	print "Configuring git"
 	call(['git', 'config', 'user.email', 'foo@bar.com'])
+	call(['git', 'pull', 'origin', 'distribution'])
 	print "Executing in", base_dir
-	process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
+	#process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
 	print "waiting..."
-	process.wait()
+	#process.wait()
 	print "stdout:", process.stdout
 	print "return code", process.returncode
 
