@@ -12,6 +12,8 @@ def update():
 	script_dir, filename = os.path.split(sys.argv[0])
 	base_dir = script_dir + "/.."
 
+	print "Configuring git"
+	call(['git', 'config', 'user.email', 'foo@bar.com'])
 	print "Executing in", base_dir
 	process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
 	print "waiting..."
