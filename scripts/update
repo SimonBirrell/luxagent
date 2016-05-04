@@ -28,8 +28,8 @@ def update():
 	#process = Popen(['git', 'pull', 'origin', 'distribution'], cwd=base_dir)
 	print "waiting..."
 	#process.wait()
-	print "stdout:", process.stdout
-	print "return code", process.returncode
+	#print "stdout:", process.stdout
+	#print "return code", process.returncode
 
 if __name__== '__main__':
 	print "Current version", luxagent.version()
