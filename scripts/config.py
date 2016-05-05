@@ -29,7 +29,6 @@ def create_config_file_if_necessary():
 		config_exists = os.path.isfile(config_pathname)
 
 		# Copy config-default.sh to config.sh if it doesn't already exist
-		print "Checking for existence of", config_pathname, config_exists 
 		if config_exists == True:
 			print config_pathname + " already exists"
 		else:	
@@ -42,13 +41,9 @@ def create_config_file_if_necessary():
 				splitLine = line.split(':')
 				if len(splitLine)>1:
 					Config_dict[splitLine[0]] = splitLine[1]
-		print "Config_dict"
-		print Config_dict		
 
 def get_value(key):
-	print "Searching for key", key
 	global Config_dict
-	print "in", Config_dict.keys()
 	if key in Config_dict.keys():
 		return Config_dict[key]
 
@@ -63,13 +58,11 @@ def set_value(key, value):
 		replace_key_value(key, value)
 
 def append_to_file(key, value):
-	print "Appending..."
 	config_pathname, config_default_pathname = get_pathnames()
 	with open(config_pathname, "a") as myfile:
 		myfile.write(key + ":" + value)
 
 def replace_key_value(key, value):
-	print "Replacing..."
 	config_pathname, config_default_pathname = get_pathnames()
 	# Create temp file
 	fh, abs_path = mkstemp()
@@ -90,7 +83,7 @@ def replace_key_value(key, value):
 
 def get_pathnames():
 	script_dir, filename = os.path.split(sys.argv[0])
-	config_dir = script_dir + "/../"
+	config_dir = script_dir + "/.."
 	config = "config.txt"
 	config_default = "config-default.txt"
 	config_pathname = config_dir + "/" + config
