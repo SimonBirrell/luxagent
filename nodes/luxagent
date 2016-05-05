@@ -10,6 +10,11 @@ from config import get_config_value
 from subprocess import call
 
 if __name__== '__main__':
-	print get_config_value('autoupdate')
+	autoupdate = get_config_value('autoupdate')
+	print "Autoupdate", autoupdate
+	if autoupdate=='true':
+		print "Will call update here..."
+	else:
+		print "Skip update (autoupdate in config.txt is not 'true')"	
 	from luxagent import main
-    main()
+	main()
