@@ -6,15 +6,25 @@
 # roslaunch luxagent luxagent.py
 #
 
-from config import get_config_value
-from subprocess import call
+import os, sys
 
 if __name__== '__main__':
-	autoupdate = get_config_value('autoupdate')
-	print "Autoupdate", autoupdate
-	if autoupdate=='true':
-		print "Will call update here..."
-	else:
-		print "Skip update (autoupdate in config.txt is not 'true')"	
+
+	# Add base_dir of package to paths to search for modules
+	script_dir, filename = os.path.split(sys.argv[0])
+	base_dir = script_dir + '/..'
+	sys.path.append(base_dir)
+
+	print "Call update"
+	from scripts.update import update	
+	# update()
+
+	print "Call install"
+	from scripts.install import install
+	agent_guid = install()
+
 	from luxagent import main
+	print "Call luxagent.main()"
+	#foo()
 	main()
+
