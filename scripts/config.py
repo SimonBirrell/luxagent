@@ -19,12 +19,6 @@ def create_config_file_if_necessary():
 	global Config_dict
 
 	if Config_dict==None:
-		# script_dir, filename = os.path.split(sys.argv[0])
-		# config_dir = script_dir + "/../"
-		# config = "config.txt"
-		# config_default = "config-default.txt"
-		# config_pathname = config_dir + "/" + config
-		# config_default_pathname = config_dir + "/" + config_default
 		config_pathname, config_default_pathname = get_pathnames()
 		config_exists = os.path.isfile(config_pathname)
 
@@ -50,7 +44,6 @@ def get_value(key):
 	return None
 
 def set_value(key, value):
-	print key, "=", value
 	previous_value = get_value(key)
 	if previous_value==None:
 		append_to_file(key, value)
@@ -60,7 +53,7 @@ def set_value(key, value):
 def append_to_file(key, value):
 	config_pathname, config_default_pathname = get_pathnames()
 	with open(config_pathname, "a") as myfile:
-		myfile.write(key + ":" + value)
+		myfile.write(key + ":" + value + "\n")
 
 def replace_key_value(key, value):
 	config_pathname, config_default_pathname = get_pathnames()

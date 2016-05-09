@@ -9,6 +9,8 @@
 from gevent import monkey; monkey.patch_all()
 import gevent
 import sys
+import logging
+logging.basicConfig()
 
 from agent_config import AgentConfig
 from ros_communication import ros_comm 
@@ -18,7 +20,7 @@ from ros_communication.ros_graph_api import RosGraphApi
 from ros_communication.ros_packages_api import RosPackagesApi
 from ros_communication.ros_pubsub_api import RosPubSubApi
 
-def main():
+def main(agent_guid="undefined", agent_password="undefined"):
     # Read configuration from agent_config.py
     # This small file can be conveniently overwritten by 
     # agent_config_development.py or agent_config_production.py

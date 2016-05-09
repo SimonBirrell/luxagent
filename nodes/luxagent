@@ -21,10 +21,10 @@ if __name__== '__main__':
 
 	print "Call install"
 	from scripts.install import install
-	agent_guid = install()
+	agent_guid, agent_password = install()
 
 	from luxagent import main
-	print "Call luxagent.main()"
+	print "Call luxagent.main(" + agent_guid + ")"
 	#foo()
-	main()
+	main(agent_guid, agent_password)
 
