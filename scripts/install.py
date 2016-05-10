@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import re
 import urllib2
 import json
@@ -68,6 +69,16 @@ def register_agent(email, auth_token, org_id, agent_slug):
 	registered_ok, info = do_request(req)
 	return registered_ok, info
 
+def overwrite_agent(email, auth_token, org_id, agent_slug, agent_id):
+	print "agent_id = ", agent_id
+	register_url = 'http://app.robotlux.com/api/v1/orgs/' + str(org_id) + '/agents/' + str(agent_id) 
+	values = {'agent': {'slug': agent_slug}}
+	data = json.dumps(values)
+	req = urllib2.Request(register_url, data, {'Content-Type': 'application/json', 'Accept': 'application/json', 'X-API-EMAIL': email, 'X-API-TOKEN': auth_token})
+	req.get_method = lambda: 'PUT'
+	written_ok, info = do_request(req)
+	return written_ok, info
+
 def install(force_reconfig=False):
 	agent_guid = get_config_value('agent_guid')
 	agent_password = get_config_value('agent_password')
@@ -96,29 +107,60 @@ def install(force_reconfig=False):
 		print
 
 		# Ask user for agent name
-		print "2. Please enter a unique name for the agent. It should describe the machine it is installed on."
-		print "Please use only letters, numbers, underscores and dashes, with no spaces or other punctuation."
-		print
 		agent_slug = ""
-		while (agent_slug in existing_agent_slugs) or not valid_name(agent_slug):
+		overwrite = " "
+		#while (agent_slug in existing_agent_slugs) or not valid_name(agent_slug):
+		while not valid_name(agent_slug):
+			print "2. Please enter a unique name for the agent. It should describe the machine it is installed on."
+			print "Please use only letters, numbers, underscores and dashes, with no spaces or other punctuation."
+			print
 			agent_slug = raw_input("Agent name: ")
-		print	
-		print "Agent name " + agent_slug + " is good."	
+			if (agent_slug in existing_agent_slugs):
+				print "This agent already exists. Registering with this name will overwrite the old agent configuration."
+				print "This is probably ok, but anyone trying to use the agent with the old configuration won't be able to."
+				print
+				input_valid = False
+				while not input_valid:
+					overwrite = raw_input("Do you want to overwrite the old agent configuration? ('y/n') ").lower()
+					input_valid = (len(overwrite)>=1) and ((overwrite[0]=='y') or (overwrite[0]=='n'))
+					if overwrite[0]=='n':
+						print
+						agent_slug = ""
+		overwrite = (overwrite[0]=='y')
+		print
+		print "Agent name " + agent_slug + " is good."
 		print
 
 		# Register agent
-		print "Registering agent " + agent_slug + " with RobotLux manager..."
-		print
-		registered_ok, info = register_agent(email, auth_token, org_id, agent_slug)
-		if not registered_ok:
-			print "ERROR while registering agent. Please try again."
-			print info
-			sys.exit()
-		print "Agent", agent_slug, "registered ok."	
-		agent_guid = agent_slug + "@" + org_slug + ".orgs.robotlux.com"
-		agent_password = info['password']
-		print "Agent GUID", agent_guid
-		print
+		if not overwrite:
+			print "Registering agent " + agent_slug + " with RobotLux manager..."
+			print
+			registered_ok, info = register_agent(email, auth_token, org_id, agent_slug)
+			if not registered_ok:
+				print "ERROR while registering agent. Please try again."
+				print info
+				sys.exit()
+			print "Agent", agent_slug, "registered ok."	
+			agent_guid = agent_slug + "@" + org_slug + ".orgs.robotlux.com"
+			agent_password = info['password']
+			print "Agent GUID", agent_guid
+			print
+		else:
+			print "Overwriting agent..."	
+			agent_id = None
+			for agent in org_agents:
+				if agent['slug']==agent_slug:
+					agent_id = agent['id']
+			registered_ok, info = overwrite_agent(email, auth_token, org_id, agent_slug, agent_id)
+			if not registered_ok:
+				print "ERROR while overwriting agent. Please try again."
+				print info
+				sys.exit()
+			print "Agent", agent_slug, "overwritten ok."	
+			agent_guid = agent_slug + "@" + org_slug + ".orgs.robotlux.com"
+			agent_password = info['password']
+			print "Agent GUID", agent_guid
+			print
 
 		# Save agent_guid
 		print "Saving Agent details to config.txt..."
