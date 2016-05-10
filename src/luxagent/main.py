@@ -6,7 +6,7 @@
 # TODO: An elegant way to exit the loop and clean up, closing the
 # socket.
 
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch_all(aggressive=False)
 import gevent
 import sys
 import logging

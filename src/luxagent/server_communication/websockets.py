@@ -2,7 +2,7 @@
 #
 
 # Import the gevent coroutine libraries. These patch the system websocket library.
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch_all(aggressive=False)
 import gevent
 
 import sys
