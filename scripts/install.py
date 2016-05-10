@@ -70,7 +70,6 @@ def register_agent(email, auth_token, org_id, agent_slug):
 	return registered_ok, info
 
 def overwrite_agent(email, auth_token, org_id, agent_slug, agent_id):
-	print "agent_id = ", agent_id
 	register_url = 'http://app.robotlux.com/api/v1/orgs/' + str(org_id) + '/agents/' + str(agent_id) 
 	values = {'agent': {'slug': agent_slug}}
 	data = json.dumps(values)
@@ -78,6 +77,33 @@ def overwrite_agent(email, auth_token, org_id, agent_slug, agent_id):
 	req.get_method = lambda: 'PUT'
 	written_ok, info = do_request(req)
 	return written_ok, info
+
+def input_agent_name(existing_agent_slugs):
+	agent_slug = ""
+	overwrite = " "
+	while not valid_name(agent_slug):
+		print "2. Please enter a unique name for the agent. It should describe the machine it is installed on."
+		print "Please use only letters, numbers, underscores and dashes, with no spaces or other punctuation."
+		print
+		agent_slug = raw_input("Agent name: ")
+		if (agent_slug in existing_agent_slugs):
+			print "This agent already exists. Registering with this name will overwrite the old agent configuration."
+			print "This is probably ok, but anyone trying to use the agent with the old configuration won't be able to."
+			print
+			input_valid = False
+			while not input_valid:
+				overwrite = raw_input("Do you want to overwrite the old agent configuration? ('y/n') ").lower()
+				input_valid = (len(overwrite)>=1) and ((overwrite[0]=='y') or (overwrite[0]=='n'))
+				if overwrite[0]=='n':
+					print
+					agent_slug = ""
+	overwrite = (overwrite[0]=='y')
+	return agent_slug, overwrite
+
+def fatal_error(message, info):
+	print message
+	print info
+	sys.exit()
 
 def install(force_reconfig=False):
 	agent_guid = get_config_value('agent_guid')
@@ -106,27 +132,7 @@ def install(force_reconfig=False):
 			print "This will be the first agent in the organization."
 		print
 
-		# Ask user for agent name
-		agent_slug = ""
-		overwrite = " "
-		#while (agent_slug in existing_agent_slugs) or not valid_name(agent_slug):
-		while not valid_name(agent_slug):
-			print "2. Please enter a unique name for the agent. It should describe the machine it is installed on."
-			print "Please use only letters, numbers, underscores and dashes, with no spaces or other punctuation."
-			print
-			agent_slug = raw_input("Agent name: ")
-			if (agent_slug in existing_agent_slugs):
-				print "This agent already exists. Registering with this name will overwrite the old agent configuration."
-				print "This is probably ok, but anyone trying to use the agent with the old configuration won't be able to."
-				print
-				input_valid = False
-				while not input_valid:
-					overwrite = raw_input("Do you want to overwrite the old agent configuration? ('y/n') ").lower()
-					input_valid = (len(overwrite)>=1) and ((overwrite[0]=='y') or (overwrite[0]=='n'))
-					if overwrite[0]=='n':
-						print
-						agent_slug = ""
-		overwrite = (overwrite[0]=='y')
+		agent_slug, overwrite = input_agent_name(existing_agent_slugs)
 		print
 		print "Agent name " + agent_slug + " is good."
 		print
@@ -137,15 +143,18 @@ def install(force_reconfig=False):
 			print
 			registered_ok, info = register_agent(email, auth_token, org_id, agent_slug)
 			if not registered_ok:
-				print "ERROR while registering agent. Please try again."
-				print info
-				sys.exit()
+				fatal_error("ERROR while registering agent. Please try again.", info)
 			print "Agent", agent_slug, "registered ok."	
-			agent_guid = agent_slug + "@" + org_slug + ".orgs.robotlux.com"
+			agent_guid = get_agent_guid(agent_slug, org_slug)
 			agent_password = info['password']
 			print "Agent GUID", agent_guid
 			print
+			print "Saving Agent details to config.txt..."
+			set_config_value('agent_guid', agent_guid)
+			set_config_value('agent_password', agent_password)
 		else:
+			# Note this doesn't have much effect yet. Will do if we 
+			# change config of agent.
 			print "Overwriting agent..."	
 			agent_id = None
 			for agent in org_agents:
@@ -153,24 +162,22 @@ def install(force_reconfig=False):
 					agent_id = agent['id']
 			registered_ok, info = overwrite_agent(email, auth_token, org_id, agent_slug, agent_id)
 			if not registered_ok:
-				print "ERROR while overwriting agent. Please try again."
-				print info
-				sys.exit()
+				fatal_error("ERROR while updating agent. Please try again.", info)
 			print "Agent", agent_slug, "overwritten ok."	
-			agent_guid = agent_slug + "@" + org_slug + ".orgs.robotlux.com"
+			agent_guid = get_agent_guid(agent_slug, org_slug)
 			agent_password = info['password']
 			print "Agent GUID", agent_guid
 			print
 
 		# Save agent_guid
-		print "Saving Agent details to config.txt..."
-		set_config_value('agent_guid', agent_guid)
-		set_config_value('agent_password', agent_password)
 		print
 		print "Launching LuxAgent node..."
 		print
 
 	return agent_guid, agent_password	
+
+def get_agent_guid(agent_slug, org_slug):
+	return agent_slug + "@" + org_slug + ".orgs.robotlux.com"
 
 def valid_name(name):
 	if len(name)==0:
