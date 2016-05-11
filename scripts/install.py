@@ -145,13 +145,6 @@ def install(force_reconfig=False):
 			if not registered_ok:
 				fatal_error("ERROR while registering agent. Please try again.", info)
 			print "Agent", agent_slug, "registered ok."	
-			agent_guid = get_agent_guid(agent_slug, org_slug)
-			agent_password = info['password']
-			print "Agent GUID", agent_guid
-			print
-			print "Saving Agent details to config.txt..."
-			set_config_value('agent_guid', agent_guid)
-			set_config_value('agent_password', agent_password)
 		else:
 			# Note this doesn't have much effect yet. Will do if we 
 			# change config of agent.
@@ -161,15 +154,19 @@ def install(force_reconfig=False):
 				if agent['slug']==agent_slug:
 					agent_id = agent['id']
 			registered_ok, info = overwrite_agent(email, auth_token, org_id, agent_slug, agent_id)
+			print "registered info", info
 			if not registered_ok:
 				fatal_error("ERROR while updating agent. Please try again.", info)
 			print "Agent", agent_slug, "overwritten ok."	
-			agent_guid = get_agent_guid(agent_slug, org_slug)
-			agent_password = info['password']
-			print "Agent GUID", agent_guid
-			print
 
 		# Save agent_guid
+		agent_guid = get_agent_guid(agent_slug, org_slug)
+		agent_password = info['password']
+		print "Saving Agent details to config.txt..."
+		print "Agent GUID", agent_guid
+		print
+		set_config_value('agent_guid', agent_guid)
+		set_config_value('agent_password', agent_password)
 		print
 		print "Launching LuxAgent node..."
 		print
