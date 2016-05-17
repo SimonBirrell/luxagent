@@ -4,6 +4,7 @@
 import nose
 from luxagent.ros_communication import ros_comm 
 from luxagent.agent import Agent
+from helpers import DummyManager
 
 AGENT_FORMAT_TEST_GRAPH = [['foo','bar'], ['baz','boo']]
 
@@ -23,6 +24,7 @@ class TestRosComms():
         self.ros_graph_api = DummyRosGraphApi()
         self.ros_packages_api = DummyRosPackagesApi() 
         self.ros_pubsub_api = DummyRosPubSubApi() 
+        self.manager_communication = DummyManager()
         self.ros_comm = ros_comm.RosCommunication(self.ros_graph_api, self.ros_packages_api, self.ros_pubsub_api)
         self.agent = Agent(self.server_comm, self.ros_comm)
     

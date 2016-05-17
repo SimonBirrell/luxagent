@@ -9,7 +9,8 @@ Config_dict = None
 
 def get_config_value(key):
 	create_config_file_if_necessary()
-	return get_value(key)
+	raw_value = get_value(key)
+	return raw_value.rstrip()
 
 def set_config_value(key, value):
 	create_config_file_if_necessary()

@@ -25,6 +25,5 @@ if __name__== '__main__':
 
 	from luxagent import main
 	print "Call luxagent.main(" + agent_guid + ")"
-	#foo()
 	main(agent_guid, agent_password)
 

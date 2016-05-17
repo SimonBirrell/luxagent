@@ -12,7 +12,9 @@ class Agent():
     # Instantiate with:
     # - ServerCommunication (which handles websocket communication with the server)
     # - RosCommunication (which is an API to all the modules that deal with ROS)
-    def __init__(self, server_comm, ros_comm):
+    def __init__(self, server_comm, ros_comm, agent_guid="username", session_token="secret"):
+        self.agent_guid = agent_guid
+        self.session_token = session_token
         self.server_comm = server_comm
         self.ros_comm = ros_comm
         self.connected_to_server = False
@@ -29,7 +31,7 @@ class Agent():
     #
     def start(self):
         machine_id = self.ros_comm.get_machine_id()
-        self.server_comm.open('ros_instance_base', 'org_id', machine_id, 'username', 'secret')
+        self.server_comm.open('ros_instance_base', 'org_id', machine_id, self.agent_guid, self.session_token)
         self.ros_comm.start_pubsub()
         machine_graph = self.ros_comm.get_machine_graph()
         machine_graph_key = 'm ' + machine_id

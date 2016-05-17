@@ -20,12 +20,12 @@ import nose
 SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 8001
 
-# This class instantiates and 'engine' that runs the tests.
+# This class instantiates an 'engine' that runs the tests.
 # A dummy server class is created that accepts a websocket connection.
 
 class TddHelp:
     def setUp(self):
-        foo = 0
+        print "setting up test engine..."
                      
     def tearDown(self):
         self.dummy_server.close()
@@ -152,7 +152,14 @@ class DummyRos():
     def get_machine_id(self):
         return "machine"    
 
+class DummyManager():
+    def __init__(self, agent_guid="foo", agent_password="bar"):
+        print "Creating dummy manager..."
 
+    def logon(self):   
+        print "Logging on to dummy manager"
+        return "some_token"   
+          
 
 
 
