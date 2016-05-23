@@ -87,6 +87,9 @@ class TestServerComms(TddHelp):
 class ServerSubscribeGraph(DummyServerHandler):
     def interpret_message(self, mtype, mbody):
         if (mtype=='agentConnect'):
+            print "======================================"
+            nose.tools.ok_(mbody['username'], "Username present in authentication payload")
+            print "===================== username present"
             server_received_agent_connect = True
             self.send_message({'mtype': 'agentConnected'})
             self.send_message({'mtype': 'subscribeGraph'})

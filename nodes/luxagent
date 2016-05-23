@@ -17,7 +17,7 @@ if __name__== '__main__':
 
 	print "Call update"
 	from scripts.update import update	
-	# update()
+	update()
 
 	print "Call install"
 	from scripts.install import install
