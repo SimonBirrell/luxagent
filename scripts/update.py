@@ -17,11 +17,11 @@ def update():
 	#script_dir, filename = os.path.split(sys.argv[0])
 	#base_dir = script_dir + "/.."
 	autoupdate = get_config_value('autoupdate')
-	if autoupdate == False:
+	print autoupdate
+	if autoupdate == 'false':
 		print "'autoupdate' in config.txt is false. Skipping update."
 		return
-	print "UPDATE!"
-	sys.exit()	
+	print "Updating..."
 
 	base_dir = get_base_dir()
 
