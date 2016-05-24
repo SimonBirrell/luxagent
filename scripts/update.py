@@ -6,6 +6,7 @@
 import os
 import sys
 from subprocess import call, Popen
+from config import get_config_value
 
 def get_base_dir():
 	script_dir, filename = os.path.split(sys.argv[0])
@@ -15,6 +16,11 @@ def get_base_dir():
 def update():
 	#script_dir, filename = os.path.split(sys.argv[0])
 	#base_dir = script_dir + "/.."
+	autoupdate = get_config_value('autoupdate')
+	if autoupdate == False:
+		print "'autoupdate' in config.txt is false. Skipping update."
+		return
+
 	base_dir = get_base_dir()
 
 	print "Update"
@@ -27,26 +33,6 @@ def update():
 	call(['git', 'reset', '--hard', 'origin/distribution'], cwd=base_dir)
 	print "update complete"
 
-# def get_next_script_from_args(args):
-# 	# See if we need to pass on next script option to pull.sh
-# 	next_script = None
-# 	next_file_option = '-n'
-# 	try:
-# 		opts, args = getopt.getopt(args,"hn:")
-# 	except getopt.GetoptError:
-# 		print 'Error in parameters:'
-# 		print 'update'
-# 		print 'update -n <next script>'
-# 		sys.exit(2)
-# 	for opt, arg in opts:
-# 		if opt == '-h':
-# 			print 'Update Utility for Luxagent'
-# 			print 'Options:'
-# 			print '-h Print help'
-# 			print next_file_option + ' <script> Next script to run.'
-# 		elif opt == next_file_option:
-# 			next_script = arg
-# 	return next_script		
 
 if __name__== '__main__':
 	args = sys.argv[1:]
