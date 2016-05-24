@@ -20,6 +20,8 @@ def update():
 	if autoupdate == False:
 		print "'autoupdate' in config.txt is false. Skipping update."
 		return
+	print "UPDATE!"
+	sys.exit()	
 
 	base_dir = get_base_dir()
 
