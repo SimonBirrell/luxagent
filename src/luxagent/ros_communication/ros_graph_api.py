@@ -2,7 +2,7 @@
 #   It calls back to RosCommunication() with parameters that are in the
 #   rosgraph format.
 
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch_all(aggressive=False)
 import gevent
 
 import sys 

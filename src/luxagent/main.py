@@ -6,24 +6,30 @@
 # TODO: An elegant way to exit the loop and clean up, closing the
 # socket.
 
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch_all(aggressive=False)
 import gevent
 import sys
+import logging
+logging.basicConfig()
 
 from agent_config import AgentConfig
 from ros_communication import ros_comm 
-from server_communication import websockets
+from server_communication import websockets, manager_communication
 from agent import Agent
 from ros_communication.ros_graph_api import RosGraphApi
 from ros_communication.ros_packages_api import RosPackagesApi
 from ros_communication.ros_pubsub_api import RosPubSubApi
 
-def main():
+def main(agent_guid="undefined", agent_password="undefined"):
     # Read configuration from agent_config.py
     # This small file can be conveniently overwritten by 
     # agent_config_development.py or agent_config_production.py
     # depending on the environment.
     agent_config = AgentConfig()
+
+    # Module for communicating with LuxManager API (Rails)
+    manager = manager_communication.ManagerCommunication(agent_guid, agent_password)
+    session_token = manager.logon()
 
     # Module for Communicating with the server
     server = websockets.ServerCommunication(agent_config.sockets_server())
@@ -39,7 +45,7 @@ def main():
     print "RosComm Initialized ok"
     
     # The Agent directs the communication between ROS and the server
-    agent = Agent(server, ros)
+    agent = Agent(server, ros, agent_guid=agent_guid, session_token=session_token)
     print "Agent created"
 
     # Start communication

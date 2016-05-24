@@ -2,7 +2,7 @@
 #
 
 # Import the gevent coroutine libraries. These patch the system websocket library.
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch_all(aggressive=False)
 import gevent
 
 import sys
@@ -93,7 +93,15 @@ class ServerCommunication():
     def agent_connect(self, ros_instance_base, org_id, machine_id, username, secret):
         print "Connecting agent: " +  ros_instance_base
         # TODO Human name hard-coded
-        self.send_to_server('agentConnect', {'rosinstance': ros_instance_base, 'org': org_id, 'user': username, 'secret': secret, 'hostname' : machine_id, 'rosInstanceHuman' : 'Pi Robot'})
+        print "Sending username", username
+        self.send_to_server('agentConnect', {
+                                                'rosinstance': ros_instance_base, 
+                                                'org': org_id, 
+                                                'user': username, 
+                                                'username': username,
+                                                'secret': secret, 
+                                                'hostname' : machine_id, 
+                                                'rosInstanceHuman' : 'Pi Robot'})
         
     # Send a (mtype, mbody) message to the server. Buffer message if the websocket isn't ready.   
     # Currently, this drops a message if it is so big that it is likely to crash the websocket.

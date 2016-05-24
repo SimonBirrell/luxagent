@@ -6,7 +6,24 @@
 # roslaunch luxagent luxagent.py
 #
 
-from luxagent import main
+import os, sys
 
 if __name__== '__main__':
-     main()
+
+	# Add base_dir of package to paths to search for modules
+	script_dir, filename = os.path.split(sys.argv[0])
+	base_dir = script_dir + '/..'
+	sys.path.append(base_dir)
+
+	print "Call update"
+	from scripts.update import update	
+	update()
+
+	print "Call install"
+	from scripts.install import install
+	agent_guid, agent_password = install()
+
+	from luxagent import main
+	print "Call luxagent.main(" + agent_guid + ")"
+	main(agent_guid, agent_password)
+
